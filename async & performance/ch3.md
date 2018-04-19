@@ -475,6 +475,19 @@ p.then( function(){
 // A B C
 ```
 
+```js
+  // 实测demo chrome输出是A、C、B 不知道作者是在什么环境测试的？
+  const p = Promise.resolve('')
+  p.then((e) => {
+    p.then(() => {
+      console.log('C');
+    });
+    console.log('A');
+  }).then(() => {
+    console.log('B');
+  });
+```
+
 Here, `"C"` cannot interrupt and precede `"B"`, by virtue of how Promises are defined to operate.
 
 #### Promise Scheduling Quirks
